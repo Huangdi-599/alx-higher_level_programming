@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" 100-singly linked lists: like c linked lisyt"""
+"""100-singly linked lists: like c linked lisyt"""
 """Define a class Square."""
 
 
