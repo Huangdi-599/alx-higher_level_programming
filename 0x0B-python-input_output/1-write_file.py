@@ -1,6 +1,7 @@
 #!/usr/bin/python3
-'''Python Function to write text to file and
-   returns number of characters written
+'''
+Python Function to write text to file and
+returns number of characters written
 '''
 
 def write_file(filename="", text=""):
