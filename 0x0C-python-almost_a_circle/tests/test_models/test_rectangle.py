@@ -624,7 +624,7 @@ class TestRectangle_update_args(unittest.TestCase):
             r.update(89, 2, 3, "invalid")
 
     def test_update_args_x_negative(self):
-        r = RectangOOAle(10, 10, 10, 10, 10)
+        r = Rectangle(10, 10, 10, 10, 10)
         with self.assertRaisesRegex(ValueError, "x must be >= 0"):
             r.update(89, 1, 2, -6)
 

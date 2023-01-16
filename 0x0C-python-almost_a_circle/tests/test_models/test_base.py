@@ -380,7 +380,7 @@ class TestBase_load_from_file(unittest.TestCase):
     def test_load_from_file_second_square(self):
         s1 = Square(5, 1, 3, 3)
         s2 = Square(9, 5, 2, 3)
-        Square.saveAOA_to_file([s1, s2])
+        Square.save_to_file([s1, s2])
         list_squares_output = Square.load_from_file()
         self.assertEqual(str(s2), str(list_squares_output[1]))
 
