@@ -1,18 +1,16 @@
 #!/usr/bin/node
 const request = require('request');
-
-const apiUrl = process.argv[2];
-
-request.get(apiUrl, (error, response, body) => {
+request(process.argv[2], function (error, response, body) {
+  if (!error) {
+    const films = JSON.parse(body).results;
+    console.log(films.reduce((count, movie) => {
+      return movie.characters.find((character) => character.endsWith('/18/'))
+        ? count + 1
+        : count;
+    }, 0));
+  }
   if (error) {
     console.error(error);
     return;
   }
-
-  const films = JSON.parse(body).results;
-  const wedgeAntillesFilms = films.filter((film) => {
-    return film.characters.some((character) => character.endsWith('/18/'));
-  });
-
-  console.log(`Wedge Antilles appears in ${wedgeAntillesFilms.length} films.`);
 });

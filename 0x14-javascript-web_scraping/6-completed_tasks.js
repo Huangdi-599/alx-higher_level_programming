@@ -1,25 +1,26 @@
 #!/usr/bin/node
+
 const request = require('request');
+const url = process.argv[2];
 
-const apiUrl = 'https://jsonplaceholder.typicode.com/todos';
-
-request(apiUrl, { json: true }, (err, res, data) => {
+request(url, function (err, response, body) {
   if (err) {
-    return console.log(err);
-  }
-
-  const tasksByUser = {};
-
-  data.forEach(task => {
-    if (task.completed) {
-      if (!tasksByUser[task.userId]) {
-        tasksByUser[task.userId] = 0;
+    console.log(err);
+  } else if (response.statusCode === 200) {
+    const completed = {};
+    const tasks = JSON.parse(body);
+    for (const i in tasks) {
+      const task = tasks[i];
+      if (task.completed === true) {
+        if (completed[task.userId] === undefined) {
+          completed[task.userId] = 1;
+        } else {
+          completed[task.userId]++;
+        }
       }
-      tasksByUser[task.userId]++;
     }
-  });
-
-  for (const [userId, numTasks] of Object.entries(tasksByUser)) {
-    console.log(`User ${userId} completed ${numTasks} tasks.`);
+    console.log(completed);
+  } else {
+    console.log('An error occured. Status code: ' + response.statusCode);
   }
 });

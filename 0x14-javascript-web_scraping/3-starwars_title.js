@@ -9,8 +9,10 @@ request.get(`https://swapi-api.alx-tools.com/api/films/${movieId}`,
   if (error) {
     console.error(error);
     return;
+  }else if (response.statusCode === 200) {
+    const movie = JSON.parse(body);
+    console.log(movie.title);
+  } else {
+    console.log('Error code: ' + response.statusCode);
   }
-
-  const movie = JSON.parse(body);
-  console.log(movie.title);
 });
